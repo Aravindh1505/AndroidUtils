@@ -1,2 +1,2 @@
-include ':app', ':androidutils'
+include ':app', ':androidutils', ':custom-dialog'
 rootProject.name='AndroidUtils'
