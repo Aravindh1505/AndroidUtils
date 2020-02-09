@@ -9,30 +9,34 @@ import android.content.Context
  */
 
 class CustomDialog {
-    fun alertDialogPopup(
-        context: Context,
-        title: String,
-        message: String,
-        positiveText: String,
-        negativeText: String,
-        icon: Int,
-        customClickListener: CustomClickListener?
-    ) {
-        val dialogBuilder = AlertDialog.Builder(context)
+    companion object {
+        fun alertDialogPopup(
+            context: Context?,
+            title: String?,
+            message: String?,
+            positiveText: String?,
+            negativeText: String?,
+            icon: Int?,
+            customClickListener: CustomClickListener?
+        ) {
+            val dialogBuilder = AlertDialog.Builder(context)
 
-        dialogBuilder.setIcon(icon)
-        dialogBuilder.setMessage(message)
-            .setCancelable(false)
-            .setPositiveButton(positiveText) { dialog, id ->
-                customClickListener?.onClick(id.toString())
-            }
-            .setNegativeButton(negativeText) { dialog, _ ->
-                dialog.cancel()
+            icon?.let {
+                dialogBuilder.setIcon(it)
             }
 
-        val alert = dialogBuilder.create()
-        alert.setTitle(title)
-        alert.show()
+            dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(positiveText) { dialog, id ->
+                    customClickListener?.onClick(id.toString())
+                }
+                .setNegativeButton(negativeText) { dialog, _ ->
+                    dialog.cancel()
+                }
+
+            val alert = dialogBuilder.create()
+            alert.setTitle(title)
+            alert.show()
+        }
     }
-
 }
